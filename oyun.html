@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini Oyun Sitesi — Eğlence Köşesi</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#ff6b6b;--muted:#9aa6b2}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(120deg,#071427 0%,#0b2436 100%);color:#e6eef6}
+    .container{max-width:1100px;margin:28px auto;padding:20px}
+    header{display:flex;gap:16px;align-items:center}
+    header h1{margin:0;font-size:20px}
+    nav{margin-left:auto;display:flex;gap:8px}
+    button.tab{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:inherit;cursor:pointer}
+    .grid{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:16px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .sidebar .card{position:sticky;top:24px}
+    .games-list{display:flex;flex-direction:column;gap:12px}
+    .game-box{padding:14px;border-radius:10px;background:rgba(255,255,255,0.02);cursor:pointer}
+    .game-box:hover{transform:translateY(-4px);transition:all .18s}
+    #play-area{min-height:360px;display:flex;align-items:center;justify-content:center}
+    /* Tic Tac Toe */
+    .ttt{display:grid;grid-template-columns:repeat(3,100px);grid-gap:6px}
+    .cell{width:100px;height:100px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(0,0,0,0.06));display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer;border-radius:8px}
+    /* Whack-a-target */
+    .target-area{position:relative;background:linear-gradient(180deg,#071429,#08233a);height:360px;border-radius:12px;overflow:hidden}
+    .target{position:absolute;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#ff8b8b 45%,#ff3b3b 60%);display:flex;align-items:center;justify-content:center;color:#111;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(255,59,59,0.18)}
+    .controls{display:flex;gap:8px;margin-top:12px}
+    audio{width:100%}
+    footer{margin-top:20px;color:var(--muted);font-size:13px}
+    .fun{font-size:12px;color:var(--muted)}
+    .playlist li{margin:6px 0;list-style:none}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#ff9a9e,#fad0c4);display:flex;align-items:center;justify-content:center;color:#111;font-weight:700}
+    @media(max-width:900px){.grid{grid-template-columns:1fr;}.sidebar{order:2}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">OG</div>
+      <h1>Mini Oyun Sitesi — Eğlence Köşesi</h1>
+      <nav>
+        <button class="tab" data-game="ttt">Tic Tac Toe</button>
+        <button class="tab" data-game="whack">Hedefe Tıkla</button>
+        <button class="tab" data-game="about">Hakkında</button>
+        <a href="index.html" class="tab">Ana Sayfa</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <main>
+        <div id="play-area" class="card">
+          <div id="game-root" style="width:100%">
+            <!-- Oyun buraya yüklenecek -->
+            <div style="text-align:center;color:var(--muted)">Bir oyun seçin veya sağdan hızlı başlat.</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><strong>Komik Öneri</strong><div class="fun">Sitenin altında gizli bir kutu yok — ama elinizi fare yerine sandalyeye koymayı deneyin 😄</div></div>
+            <div class="fun">PUAN TOPLA, GÜLÜMSE</div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="sidebar">
+        <div class="card">
+          <h3>Hızlı Oyunlar</h3>
+          <div class="games-list">
+            <div class="game-box" data-game="ttt">▶ Tic Tac Toe (2 kişi / Bilgisayara karşı)</div>
+            <div class="game-box" data-game="whack">▶ Hedefe Tıkla (reaksiyon oyunu)</div>
+            <div class="game-box" data-game="about">▶ Hakkında & Eğlence</div>
+            <a href="index.html">▶ Ana Sayfa</a>
+          </div>
+
+          <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+
+          <h4>Müzik (Türkçe playlist)</h4>
+          <ul class="playlist">
+            <li>1. Şaka Şarkısı — Artist (placeholder)</li>
+            <li>2. Eğlence Melodisi — Artist (placeholder)</li>
+            <li>3. Dans Etme Zamanı — Artist (placeholder)</li>
+          </ul>
+          <audio controls id="bg-audio">
+            <!-- Kullanıcı kendi mp3'lerini koysun -->
+            <source src="" type="audio/mpeg">
+            Tarayıcınız audio elementini desteklemiyor.
+          </audio>
+
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4>Talimat</h4>
+          <ol style="padding-left:18px">
+            <li>Sağdaki oyunlardan birini seçin.</li>
+            <li>Oyun alanında talimatlar görünecektir.</li>
+            <li>Müzik eklemek için &lt;audio&gt; içindeki source'a mp3 yolu koyun.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="container">
+      <div class="card" style="text-align:center">Hazırlandı — İstediğinizi değiştireyim mi? (müzik, oyunlar, komik görseller ekleyebilirim)</div>
+    </footer>
+  </div>
+
+  <script>
+    // Basit oyun yükleyici
+    const root = document.getElementById('game-root');
+    const tabs = Array.from(document.querySelectorAll('.tab, .game-box'));
+    tabs.forEach(t => t.addEventListener('click',()=> loadGame(t.dataset.game)));
+
+    function loadGame(name){
+      if(name==='ttt') loadTicTacToe();
+      else if(name==='whack') loadWhack();
+      else if(name==='about') loadAbout();
+    }
+
+    // --- Tic Tac Toe ---
+    function loadTicTacToe(){
+      root.innerHTML = `
+        <div style="text-align:center">
+          <h2>Tic Tac Toe</h2>
+          <div id="board" class="ttt"></div>
+          <div style="margin-top:12px"><button id="reset">Yeniden Başlat</button> <span id="msg" style="margin-left:12px;color:var(--muted)"></span></div>
+        </div>`;
+      const board = document.getElementById('board');
+      const msg = document.getElementById('msg');
+      let cells = Array(9).fill(null);
+      let turn = 'X';
+      function draw(){
+        board.innerHTML = '';
+        for(let i=0;i<9;i++){
+          const c = document.createElement('div'); c.className='cell'; c.textContent = cells[i]||'';
+          c.addEventListener('click',()=>{ if(cells[i]) return; cells[i]=turn; turn = turn==='X'?'O':'X'; draw(); check(); });
+          board.appendChild(c);
+        }
+      }
+      function check(){
+        const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        for(const w of wins){ const [a,b,c]=w; if(cells[a] && cells[a]===cells[b] && cells[a]===cells[c]){ msg.textContent = cells[a]+ ' kazandı!'; return; }}
+        if(cells.every(Boolean)) msg.textContent='Berabere!'; else msg.textContent='';
+      }
+      document.getElementById('reset').addEventListener('click',()=>{cells=Array(9).fill(null);turn='X'; msg.textContent=''; draw();});
+      draw();
+    }
+
+    // --- Whack-a-target (Hedefe Tıkla) ---
+    function loadWhack(){
+      root.innerHTML = `
+        <div style="width:100%">
+          <h2 style="text-align:center">Hedefe Tıkla</h2>
+          <div class="target-area" id="arena"></div>
+          <div class="controls"><div>Skor: <span id="score">0</span></div><button id="start">Başlat</button><button id="stop">Dur</button></div>
+        </div>`;
+      const arena = document.getElementById('arena');
+      const scoreEl = document.getElementById('score');
+      const start = document.getElementById('start');
+      const stop = document.getElementById('stop');
+      let score=0, timer=null, target=null;
+      function spawn(){
+        if(target) target.remove();
+        target = document.createElement('div'); target.className='target';
+        target.style.left = (Math.random()*80 + 5) + '%';
+        target.style.top = (Math.random()*75 + 5) + '%';
+        target.textContent = Math.floor(Math.random()*9)+1;
+        target.addEventListener('click',()=>{ score+=10; scoreEl.textContent=score; target.remove(); });
+        arena.appendChild(target);
+        // next spawn
+      }
+      start.addEventListener('click',()=>{ if(timer) clearInterval(timer); score=0; scoreEl.textContent=score; spawn(); timer=setInterval(spawn,900);});
+      stop.addEventListener('click',()=>{ if(timer) clearInterval(timer); if(target) target.remove(); timer=null;});
+    }
+
+    function loadAbout(){
+      root.innerHTML = `<div style="padding:18px;color:var(--muted)"><h2>Hakkında</h2><p>Bu küçük demo HTML + CSS + JS ile hazırlanmıştır. İstersen şunları ekleyebilirim:</p><ul><li>Daha fazla oyun: Yılan, Hafıza kartları, Platform minigame</li><li>Müzik çalma listesi otomatik oynatma + shuffle</li><li>Skor kaydetme (localStorage) ve leaderboard</li></ul><p>Ne istersin? Bana söyle, hemen ekleyeyim.</p></div>`;
+    }
+
+    // Hızlı başlat: ilk oyun ttt
+    // loadGame('ttt');
+
+    // Allow clicking anywhere in right column game-boxes
+    document.querySelectorAll('.game-box').forEach(el=>el.addEventListener('click',()=>loadGame(el.dataset.game)));
+
+  </script>
+</body>
+</html>
