@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marina Blue | Tekne Organizasyonu</title>
+  <meta name="description" content="Doğum günü, evlilik teklifi, kurumsal davet ve boğaz turları için tekne organizasyonu – fotoğraflı, modern, mobil uyumlu tek sayfa web sitesi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0f1a; --fg:#f7f9fc; --primary:#2ec4b6; --muted:#9aa4b2; --card:#111827; --glass:rgba(255,255,255,.08);
+      --accent:#ffba08; --danger:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--fg);scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;border-radius:16px}
+    .container{width:min(1200px,92%);margin-inline:auto}
+    .btn{display:inline-block;padding:12px 20px;border-radius:14px;background:var(--primary);color:#00171f;font-weight:600;box-shadow:0 10px 25px rgba(46,196,182,.25);transition:.25s}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
+    .btn.outline{background:transparent;border:2px solid var(--fg);color:var(--fg)}
+    .pill{padding:6px 12px;border-radius:999px;background:var(--glass);backdrop-filter:blur(8px);font-size:12px;color:var(--muted)}
+    header{position:sticky;top:0;z-index:50;background:rgba(10,15,26,.75);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    nav .brand{display:flex;gap:10px;align-items:center}
+    .brand .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1d4ed8,#2ec4b6);display:grid;place-items:center;font-weight:800}
+    .nav-links{display:flex;gap:18px}
+    .nav-links a{opacity:.85}
+    .nav-links a:hover{opacity:1}
+
+    /* HERO */
+    .hero{position:relative;isolation:isolate}
+    .hero-media{position:absolute;inset:0;z-index:-1}
+    .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,15,26,.2),rgba(10,15,26,.8) 60%,var(--bg))}
+    .hero-media img{width:100%;height:70vh;object-fit:cover}
+    .hero-inner{padding:90px 0 40px}
+    .hero .kicker{margin-top:60px}
+    .hero h1{font-size:clamp(28px,5vw,56px);line-height:1.08;margin:14px 0}
+    .hero p{max-width:720px;color:#dbe3ea}
+    .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+
+    /* SECTIONS */
+    section{padding:56px 0;border-top:1px solid rgba(255,255,255,.06)}
+    h2{font-size:clamp(24px,3vw,36px);margin:0 0 14px}
+    .lead{color:#cbd5e1}
+
+    /* GRID */
+    .grid{display:grid;gap:20px}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    @media (max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
+
+    /* CARDS */
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+    .card .content{padding:16px}
+    .icon{font-size:20px;margin-right:8px}
+
+    /* PRICING */
+    .price{font-size:28px;font-weight:700}
+    .chip{font-size:12px;color:#0a0f1a;background:var(--accent);padding:4px 10px;border-radius:999px;margin-left:8px}
+
+    /* GALLERY */
+    .gallery{columns:1;column-gap:16px}
+    @media (min-width:720px){.gallery{columns:2}}
+    @media (min-width:1024px){.gallery{columns:3}}
+    .gallery img{margin-bottom:16px;border-radius:16px}
+
+    /* FORM */
+    form{display:grid;gap:12px}
+    input, textarea, select{width:100%;padding:12px 14px;background:#0f172a;color:var(--fg);border:1px solid rgba(255,255,255,.08);border-radius:14px}
+    label{font-size:14px;color:#cbd5e1}
+    .form-grid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    @media (max-width:720px){.form-grid{grid-template-columns:1fr}}
+
+    /* FOOTER */
+    footer{padding:32px 0;color:#9aa4b2}
+    .social{display:flex;gap:10px}
+
+    /* UTIL */
+    .row{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+    .center{text-align:center}
+    .muted{color:var(--muted)}
+
+    /* Floating WhatsApp */
+    .float-wa{position:fixed;right:18px;bottom:18px;background:#25D366;color:#001;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;box-shadow:0 10px 25px rgba(37,211,102,.35);font-weight:800}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="logo">MB</div>
+          <div>
+            <strong>Marina Blue</strong>
+            <div class="muted" style="font-size:12px">Tekne Organizasyonu</div>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#hizmetler">Hizmetler</a>
+          <a href="#galeri">Galeri</a>
+          <a href="#paketler">Paketler</a>
+          <a href="#rezervasyon">Rezervasyon</a>
+          <a href="#iletisim">İletişim</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="ana-sayfa">
+    <div class="hero-media">
+      <img alt="Boğazda tekne" src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=2000&auto=format&fit=crop" />
+    </div>
+    <div class="container hero-inner">
+      <span class="pill kicker">İstanbul Boğazı · Premium Hizmet</span>
+      <h1>Doğum günü, evlilik teklifi, kurumsal davet…<br>Her anınıza yakışan <span style="color:var(--accent)">tekne organizasyonu</span>.</h1>
+      <p>Profesyonel ekip, şık sunum, seçkin menüler ve fotoğraf-video çekimleriyle
+tüm detayı biz düşünelim; siz sadece anın tadını çıkarın.</p>
+      <div class="cta">
+        <a class="btn" href="#rezervasyon">Hemen Rezervasyon</a>
+        <a class="btn outline" href="#galeri">Galeriye Göz At</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hizmetler -->
+  <section id="hizmetler">
+    <div class="container">
+      <h2>Hizmetlerimiz</h2>
+      <p class="lead">İhtiyacınıza uygun esnek çözümler. Şeffaf fiyatlandırma ve memnuniyet garantisi.</p>
+      <div class="grid grid-4" style="margin-top:18px">
+        <div class="card">
+          <img alt="Evlilik teklifi" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1600&auto=format&fit=crop">
+          <div class="content">
+            <h3>Romantik & Evlilik Teklifi</h3>
+            <p class="muted">Gül yaprakları, keman dinletisi, özel süsleme ve profesyonel fotoğraf çekimi.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img alt="Doğum günü" src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=1600&auto=format&fit=crop">
+          <div class="content">
+            <h3>Doğum Günü & Parti</h3>
+            <p class="muted">DJ veya canlı müzik, temalı pasta, ışık ve ses sistemi, after-movie.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img alt="Kurumsal davet" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop">
+          <div class="content">
+            <h3>Kurums
