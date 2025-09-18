@@ -204,6 +204,26 @@ setInterval(() => {
 <marquee behavior="alternate" direction="left" scrollamount="10">
   💃 Göztepe Şampıyon 🕺
 </marquee>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Şifreli Sayfa</title>
+  <script>
+    var sifre = "12345"; // Buraya şifreyi yaz
+    var giris = prompt("Sayfayı görüntülemek için şifreyi girin:");
+
+    if (giris !== sifre) {
+      alert("Şifre yanlış!");
+      window.location.href = "https://www.google.com"; // Yanlışsa yönlendirme
+    }
+  </script>
+</head>
+<body>
+  <h1>Merhaba, şifreyi doğru girdiniz!</h1>
+</body>
+</html>
+
 
 
 
