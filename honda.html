@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egzoz Görseli</title>
+<style>
+  /* Sayfayı tamamen kaplayan arka plan resmi */
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    background: url('https://i.ibb.co/VWkp7j9G/Whats-App-Image-2025-09-22-at-10-19-06.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  /* Alt kısma yerleştirilen YouTube videosu */
+  .audio-player {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 560px;
+    height: 315px;
+    z-index: 10;
+  }
+
+  @media (max-width: 600px) {
+    .audio-player {
+      width: 100%;
+      height: 200px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- YouTube egzoz sesi -->
+<div class="audio-player">
+  <iframe width="100%" height="100%" 
+    src="https://www.youtube.com/embed/4x8rQQxky44?autoplay=1&loop=1&playlist=4x8rQQxky44" 
+    title="Egzoz Sesi" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+  </iframe>
+</div>
+
+</body>
+</html>
